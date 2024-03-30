@@ -4,9 +4,9 @@ using namespace std;
 
 vector<pair<int, int>> edge_list;
 
-void cfat200_1_INPUT()
+void input(string fileName)
 {
-	ifstream inputFile("c-fat200-1.txt");
+	ifstream inputFile(fileName);
 	int N1, N2;
 	inputFile >> N1;
 	inputFile >> N2;
@@ -28,7 +28,7 @@ map<int, int> calculate_degree()
 {
 	map<int, int> degree;
 	for (auto edge : edge_list)
-	{ 
+	{
 		degree[edge.first]++;
 		degree[edge.second]++;
 	}
@@ -48,7 +48,7 @@ vector<int> min_degree_nodes(map<int, int> &deg)
 	cout << "MIN DEGREE: " << min_deg << endl;
 
 	for (auto pair : deg)
-		if (pair.second == min_deg)
+		if (min_deg != INT_MAX and pair.second == min_deg)
 			u.push_back(pair.first);
 
 	return u;
@@ -121,7 +121,7 @@ void modify_edge_list(vector<int> &m)
 		auto itr1 = find(m.begin(), m.end(), first_node);
 		auto itr2 = find(m.begin(), m.end(), second_node);
 
-		if (itr1 == m.end() && itr2 == m.end())
+		if ((itr1 == m.end()) && (itr2 == m.end()))
 			new_edge_list.push_back(edge);
 	}
 
@@ -132,7 +132,7 @@ vector<int> CSSA()
 {
 	vector<int> C;
 
-	while (edge_list.size() != 0)
+	while (!edge_list.empty())
 	{
 		cout << "NO OF EDGES : " << edge_list.size() << endl;
 		/*
@@ -178,7 +178,9 @@ vector<int> CSSA()
 
 int main()
 {
-	cfat200_1_INPUT();
+	string fileName;
+	cin >> fileName;
+	input(fileName);
 	vector<int> C = CSSA();
 
 	cout << C.size() << endl;
