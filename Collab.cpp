@@ -168,9 +168,13 @@ vector<int> CSSA()
 		*/
 
 		vector<int> m = min_degree_nodes(adj_nodes_degrees);
+		sort(m.begin(),m.end());
+		reverse(m.begin(),m.end());
+		vector<int> tmp;
+		tmp.push_back(m[0]);
 		// vector<int> m = result(u,deg);
-		modify_edge_list(m);
-		C.insert(C.end(), m.begin(), m.end());
+		modify_edge_list(tmp);
+		C.insert(C.end(), tmp.begin(), tmp.end());
 	}
 
 	return C;
@@ -184,7 +188,7 @@ int main()
 	vector<int> C = CSSA();
 
 	cout << C.size() << endl;
-	for (auto element : C)
-		cout << element << "\n";
-	cout << endl;
+	// for (auto element : C)
+	// 	cout << element << "\n";
+	// cout << endl;
 }
